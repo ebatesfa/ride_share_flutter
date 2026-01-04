@@ -10,27 +10,55 @@ class AuthScreen extends StatefulWidget {
 }
 
 class _AuthScreenState extends State<AuthScreen> {
-  bool showLogin = true;
-
-  void toggleForm() {
-    setState(() {
-      showLogin = !showLogin;
-    });
-  }
+  bool isLogin = true;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: SafeArea(
-        child: Center(
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.all(24),
-            child: showLogin
-                ? LoginForm(onSwitch: toggleForm)
-                : SignupForm(onSwitch: toggleForm),
+      body: Column(
+        children: [
+          Container(
+            padding: const EdgeInsets.only(top: 60, bottom: 30),
+            width: double.infinity,
+            decoration: const BoxDecoration(
+              color: Color(0xFF1976D2),
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(30),
+                bottomRight: Radius.circular(30),
+              ),
+            ),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    TextButton(
+                      onPressed: () => setState(() => isLogin = true),
+                      child: Text(
+                        'Login',
+                        style: TextStyle(
+                          color: isLogin ? Colors.white : Colors.white70,
+                          fontSize: 18,
+                        ),
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () => setState(() => isLogin = false),
+                      child: Text(
+                        'Sign Up',
+                        style: TextStyle(
+                          color: !isLogin ? Colors.white : Colors.white70,
+                          fontSize: 18,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
-        ),
+          Expanded(child: isLogin ? const LoginForm() : const SignupForm()),
+        ],
       ),
     );
   }

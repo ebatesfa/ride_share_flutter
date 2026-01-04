@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'screens/splash_screen.dart';
+import 'screens/auth_screen/auth_screen.dart';
+import 'screens/home_screen.dart';
 
 void main() {
   runApp(const RideShareApp());
@@ -11,12 +13,17 @@ class RideShareApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'RideShare',
       debugShowCheckedModeBanner: false,
+      title: 'RideShare',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primaryColor: const Color(0xFF1976D2),
+        scaffoldBackgroundColor: Colors.white,
       ),
-      home: const SplashScreen(),
+      routes: {
+        '/': (context) => const SplashScreen(),
+        '/auth': (context) => const AuthScreen(),
+        '/home': (context) => const HomeScreen(),
+      },
     );
   }
 }

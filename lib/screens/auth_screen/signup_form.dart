@@ -1,62 +1,77 @@
 import 'package:flutter/material.dart';
 
-class SignupForm extends StatelessWidget {
-  final VoidCallback onSwitch;
+class SignupForm extends StatefulWidget {
+  const SignupForm({super.key});
 
-  const SignupForm({super.key, required this.onSwitch});
+  @override
+  State<SignupForm> createState() => _SignupFormState();
+}
+
+class _SignupFormState extends State<SignupForm> {
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        const SizedBox(height: 40),
-        const Text(
-          'RideShare',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: 32,
-            fontWeight: FontWeight.bold,
-            color: Colors.blue,
-          ),
-        ),
-        const SizedBox(height: 50),
         TextField(
+          controller: nameController,
           decoration: InputDecoration(
-            hintText: 'Name',
+            hintText: 'Full Name',
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(8),
             ),
+            filled: true,
+            fillColor: Colors.white,
           ),
         ),
         const SizedBox(height: 16),
         TextField(
+          controller: emailController,
           decoration: InputDecoration(
-            hintText: 'Email',
+            hintText: 'Email or Phone',
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(8),
             ),
+            filled: true,
+            fillColor: Colors.white,
           ),
         ),
         const SizedBox(height: 16),
         TextField(
+          controller: passwordController,
           obscureText: true,
           decoration: InputDecoration(
             hintText: 'Password',
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(8),
             ),
+            filled: true,
+            fillColor: Colors.white,
           ),
         ),
         const SizedBox(height: 24),
         ElevatedButton(
-          onPressed: () {},
-          child: const Text('Sign Up'),
+          onPressed: () {
+            // Sign Up logic
+          },
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.blue,
+            padding: const EdgeInsets.symmetric(vertical: 16),
+          ),
+          child: const Text('Sign Up', style: TextStyle(fontSize: 16)),
         ),
         const SizedBox(height: 16),
-        TextButton(
-          onPressed: onSwitch,
-          child: const Text("Already have an account? Login"),
+        Center(
+          child: TextButton(
+            onPressed: () {
+              // Switch to Login tab
+            },
+            child: const Text("Already have an account? Login"),
+          ),
         ),
       ],
     );
