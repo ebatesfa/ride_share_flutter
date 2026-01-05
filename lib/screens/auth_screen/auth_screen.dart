@@ -18,38 +18,43 @@ class _AuthScreenState extends State<AuthScreen> {
       body: Column(
         children: [
           Container(
-            padding: const EdgeInsets.only(top: 60, bottom: 30),
+            padding: const EdgeInsets.only(top: 52, bottom: 12),
             width: double.infinity,
             decoration: const BoxDecoration(
               color: Color(0xFF1976D2),
               borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(30),
-                bottomRight: Radius.circular(30),
+                bottomLeft: Radius.circular(20),
+                bottomRight: Radius.circular(20),
               ),
             ),
             child: Column(
               children: [
+                const Text('RideShare', style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
+                const SizedBox(height: 12),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    TextButton(
-                      onPressed: () => setState(() => isLogin = true),
-                      child: Text(
-                        'Login',
-                        style: TextStyle(
-                          color: isLogin ? Colors.white : Colors.white70,
-                          fontSize: 18,
+                    GestureDetector(
+                      onTap: () => setState(() => isLogin = true),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 22),
+                        decoration: BoxDecoration(
+                          color: isLogin ? Colors.white : Colors.transparent,
+                          borderRadius: BorderRadius.circular(20),
                         ),
+                        child: Text('Login', style: TextStyle(color: isLogin ? const Color(0xFF1976D2) : Colors.white70, fontSize: 16)),
                       ),
                     ),
-                    TextButton(
-                      onPressed: () => setState(() => isLogin = false),
-                      child: Text(
-                        'Sign Up',
-                        style: TextStyle(
-                          color: !isLogin ? Colors.white : Colors.white70,
-                          fontSize: 18,
+                    const SizedBox(width: 12),
+                    GestureDetector(
+                      onTap: () => setState(() => isLogin = false),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 18),
+                        decoration: BoxDecoration(
+                          color: !isLogin ? Colors.white : Colors.transparent,
+                          borderRadius: BorderRadius.circular(20),
                         ),
+                        child: Text('Sign Up', style: TextStyle(color: !isLogin ? const Color(0xFF1976D2) : Colors.white70, fontSize: 16)),
                       ),
                     ),
                   ],
@@ -57,7 +62,11 @@ class _AuthScreenState extends State<AuthScreen> {
               ],
             ),
           ),
-          Expanded(child: isLogin ? const LoginForm() : const SignupForm()),
+          Expanded(
+            child: SingleChildScrollView(
+              child: isLogin ? const LoginForm() : const SignupForm(),
+            ),
+          ),
         ],
       ),
     );

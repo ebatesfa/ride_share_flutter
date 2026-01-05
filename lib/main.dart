@@ -17,7 +17,9 @@ class RideShareApp extends StatelessWidget {
       title: 'RideShare',
       theme: ThemeData(
         primaryColor: const Color(0xFF1976D2),
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF1976D2)),
         scaffoldBackgroundColor: Colors.white,
+        useMaterial3: false,
       ),
       routes: {
         '/': (context) => const SplashScreen(),

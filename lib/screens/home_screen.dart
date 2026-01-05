@@ -8,89 +8,158 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.transparent,
         elevation: 0,
-        title: const Text(
-          'RideShare',
-          style: TextStyle(fontWeight: FontWeight.bold),
+        leading: IconButton(
+          icon: const Icon(Icons.menu, color: Colors.white),
+          onPressed: () {},
         ),
-        centerTitle: true,
         actions: [
           IconButton(
-            icon: const Icon(Icons.person_outline),
-            onPressed: () {
-              // Navigate to Profile Screen
-            },
+            icon: const Icon(Icons.person_outline, color: Colors.white),
+            onPressed: () {},
           ),
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            // Post Ride / Find Ride buttons
-            Row(
+      body: Column(
+        children: [
+          Container(
+            height: 220,
+            width: double.infinity,
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                colors: [Color(0xFF1E88E5), Color(0xFF1976D2)],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(20),
+                bottomRight: Radius.circular(20),
+              ),
+            ),
+            child: Stack(
               children: [
-                Expanded(
-                  child: ElevatedButton.icon(
-                    onPressed: () {
-                      // Navigate to Post Ride Screen
-                    },
-                    icon: const Icon(Icons.add_road),
-                    label: const Text('Post a Ride'),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blue,
-                      padding: const EdgeInsets.symmetric(vertical: 20),
+                Positioned.fill(
+                  child: Opacity(
+                    opacity: 0.08,
+                    child: Image.network(
+                      'https://maps.gstatic.com/tactile/basepage/pegman_sherpa.png',
+                      fit: BoxFit.cover,
+                      errorBuilder: (_, __, ___) => const SizedBox.shrink(),
                     ),
                   ),
                 ),
-                const SizedBox(width: 16),
+                const Center(
+                  child: Text(
+                    'RideShare',
+                    style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                Positioned(
+                  left: 20,
+                  top: 40,
+                  child: Icon(Icons.directions_car, color: Colors.white70, size: 28),
+                ),
+                Positioned(
+                  right: 40,
+                  top: 80,
+                  child: Icon(Icons.local_taxi, color: Colors.white70, size: 26),
+                ),
+                Positioned(
+                  right: 24,
+                  bottom: 24,
+                  child: Icon(Icons.location_on, color: Colors.redAccent, size: 28),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12),
+            child: Row(
+              children: [
                 Expanded(
-                  child: ElevatedButton.icon(
-                    onPressed: () {
-                      // Navigate to Find Ride Screen
-                    },
-                    icon: const Icon(Icons.search),
-                    label: const Text('Find a Ride'),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blue,
-                      padding: const EdgeInsets.symmetric(vertical: 20),
+                  child: Container(
+                    height: 92,
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF1976D2),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: InkWell(
+                      onTap: () {},
+                      borderRadius: BorderRadius.circular(12),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [
+                          Icon(Icons.add_road, color: Colors.white, size: 28),
+                          SizedBox(height: 8),
+                          Text('Post a Ride', style: TextStyle(color: Colors.white)),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Container(
+                    height: 92,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(color: Colors.grey),
+                    ),
+                    child: InkWell(
+                      onTap: () {},
+                      borderRadius: BorderRadius.circular(12),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [
+                          Icon(Icons.search, color: Color(0xFF1976D2), size: 28),
+                          SizedBox(height: 8),
+                          Text('Find a Ride', style: TextStyle(color: Color(0xFF1976D2))),
+                        ],
+                      ),
                     ),
                   ),
                 ),
               ],
             ),
-            const SizedBox(height: 20),
-
-            // Available Rides list
-            Expanded(
-              child: ListView(
-                children: [
-                  _rideCard(
-                    driverName: 'John Doe',
-                    route: 'Downtown to Airport',
-                    dateTime: 'Today, 4:00 PM',
-                    seats: 2,
-                    price: 10,
-                  ),
-                  _rideCard(
-                    driverName: 'Jane Smith',
-                    route: 'City Center to Mall',
-                    dateTime: 'Tomorrow, 10:00 AM',
-                    seats: 3,
-                    price: 15,
-                  ),
-                  // Add more rides here
-                ],
-              ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: const [
+                Text('Available Rides', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                Text('See all', style: TextStyle(color: Colors.blue)),
+              ],
             ),
-          ],
-        ),
+          ),
+          Expanded(
+            child: ListView(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              children: [
+                _rideCard(
+                  driverName: 'John Doe',
+                  route: 'Downtown to Airport',
+                  dateTime: 'Today, 4:00 PM',
+                  seats: 2,
+                  price: 10,
+                ),
+                _rideCard(
+                  driverName: 'Jane Smith',
+                  route: 'City Center to Mall',
+                  dateTime: 'Tomorrow, 10:00 AM',
+                  seats: 3,
+                  price: 15,
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
 
-  // Ride card widget
   Widget _rideCard({
     required String driverName,
     required String route,
@@ -106,9 +175,7 @@ class HomeScreen extends StatelessWidget {
         title: Text(driverName, style: const TextStyle(fontWeight: FontWeight.bold)),
         subtitle: Text('$route\n$dateTime • $seats Seats'),
         trailing: Text('\$$price', style: const TextStyle(fontWeight: FontWeight.bold)),
-        onTap: () {
-          // Navigate to Ride Details
-        },
+        onTap: () {},
       ),
     );
   }
